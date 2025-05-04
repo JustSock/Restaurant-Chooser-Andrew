@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
 class CustomTextInput extends Component {
   render() {
-    const { label, labelStyle, maxLength, textInputStyle, stateHolder, stateFieldName } = this.props;
+    const { label, labelStyle, maxLength, textInputStyle, stateHolder, stateFieldName, onChangeText, error, ...props } = this.props;
     return (
       <View>
         <Text style={[styles.fieldLabel, labelStyle]}>{label}</Text>
@@ -37,8 +37,14 @@ class CustomTextInput extends Component {
             obj[stateFieldName] = inText;
             return obj;
           })}
-          style={[styles.textInput, textInputStyle]}
+          style={[styles.textInput, textInputStyle, error ? { borderColor: 'red', borderWidth: 1 } : {}]}
+          {...props}
         />
+        {error && (
+          <Text style={{ color: 'red', marginLeft: 10, fontSize: 12 }}>
+            {error}
+          </Text>
+        )}
       </View>
     );
   }
@@ -51,6 +57,8 @@ CustomTextInput.propTypes = {
   textInputStyle: PropTypes.object,
   stateHolder: PropTypes.object.isRequired,
   stateFieldName: PropTypes.string.isRequired,
+  onChangeText: PropTypes.func,
+  onChangeText: PropTypes.func
 };
 
 export default CustomTextInput;
