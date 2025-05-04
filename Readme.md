@@ -26,11 +26,13 @@
    cd restaurant-management-app
 
 2. **Установите зависимости**
+    ```bash
     npm install
     # или
     yarn install
 
 3. **Запустите приложение**
+    ```bash
     bash
     expo start
 
